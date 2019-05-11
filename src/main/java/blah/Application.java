@@ -18,6 +18,8 @@ import org.springframework.jms.support.converter.MessageType;
 @EnableJms
 public class Application {
 	
+	
+	//This below is not really necessary....
 	@Bean
     public JmsListenerContainerFactory<?> myFactory(ConnectionFactory connectionFactory,
                                                     DefaultJmsListenerContainerFactoryConfigurer configurer) {
@@ -38,11 +40,12 @@ public class Application {
 
     public static void main(String[] args) {
         // Launch the application
+    	
         ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
-
         JmsTemplate jmsTemplate = context.getBean(JmsTemplate.class);
-
+        
         // Send a message with a POJO - the template reuse the message converter
+        
         System.out.println("Sending an email message.");
         jmsTemplate.convertAndSend("texas", new Email("rodneythomas14@example.com", "bye"));
     }
